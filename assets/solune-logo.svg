@@ -1,0 +1,30 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Solune">
+  <defs>
+    <linearGradient id="solune-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5ce1e6"/>
+      <stop offset="1" stop-color="#7c8cff"/>
+    </linearGradient>
+    <!-- masque pour le croissant de lune -->
+    <mask id="solune-moon">
+      <rect width="64" height="64" fill="black"/>
+      <circle cx="40" cy="32" r="15" fill="white"/>
+      <circle cx="46.5" cy="27" r="13" fill="black"/>
+    </mask>
+  </defs>
+  <!-- tuile dégradée -->
+  <rect width="64" height="64" rx="16" fill="url(#solune-g)"/>
+  <!-- soleil -->
+  <circle cx="23" cy="30" r="6.5" fill="#0a0f24"/>
+  <g stroke="#0a0f24" stroke-width="2" stroke-linecap="round">
+    <line x1="23" y1="18.5" x2="23" y2="21"/>
+    <line x1="23" y1="39" x2="23" y2="41.5"/>
+    <line x1="11.5" y1="30" x2="14" y2="30"/>
+    <line x1="32" y1="30" x2="34.5" y2="30"/>
+    <line x1="15" y1="22" x2="16.8" y2="23.8"/>
+    <line x1="29.2" y1="36.2" x2="31" y2="38"/>
+    <line x1="31" y1="22" x2="29.2" y2="23.8"/>
+    <line x1="16.8" y1="36.2" x2="15" y2="38"/>
+  </g>
+  <!-- croissant de lune (sombre) -->
+  <rect width="64" height="64" fill="#0a0f24" mask="url(#solune-moon)"/>
+</svg>

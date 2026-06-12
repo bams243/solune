@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solune — Ton assistant IA 100% local & privé</title>
+<meta name="description" content="Solune : assistant vocal, vision et code qui tourne entièrement sur ton Mac. Zéro cloud, zéro abonnement, tes données ne sortent jamais.">
+<link rel="icon" type="image/svg+xml" href="assets/solune-logo.svg">
+<!-- Partage social (Open Graph + Twitter) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Solune — Ton assistant IA 100% local & privé">
+<meta property="og:description" content="Voix, vision et code, entièrement sur ton Mac. Zéro cloud, zéro abonnement. Dis « Hey Solune ».">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Solune — Ton assistant IA 100% local & privé">
+<meta name="twitter:description" content="Voix, vision et code, entièrement sur ton Mac. Zéro cloud. Dis « Hey Solune ».">
+<meta name="twitter:image" content="assets/og-image.png">
+<style>
+  :root{
+    --bg:#0a0a14; --bg2:#0e0f1d; --card:#14152400; --card-bd:#23263a;
+    --fg:#eef1f7; --muted:#9aa3b8; --accent:#5ce1e6; --accent2:#7c8cff;
+    --good:#46d6a0; --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#1a1c33 0,var(--bg) 55%);
+    color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  .btn{display:inline-block;padding:14px 26px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;border:0;transition:.18s transform,.18s box-shadow}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06121a;box-shadow:0 10px 30px -8px var(--accent2)}
+  .btn-ghost{border:1px solid var(--card-bd);color:var(--fg)}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--card-bd);border-radius:999px;font-size:13px;color:var(--muted);background:#ffffff06}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 10px var(--good)}
+
+  /* Nav */
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:#0a0a14cc;border-bottom:1px solid #ffffff0d}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.2px}
+  .brand .glyph{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#06121a;font-weight:900}
+  nav .links{display:flex;gap:26px;align-items:center;color:var(--muted);font-size:15px}
+  nav .links a:hover{color:var(--fg)}
+
+  /* Hero */
+  header{padding:84px 0 64px;text-align:center}
+  h1{font-size:clamp(34px,6vw,60px);line-height:1.05;margin:18px 0 16px;letter-spacing:-1px}
+  h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:680px;margin:0 auto 30px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .reassure{margin-top:18px;color:var(--muted);font-size:14px}
+
+  /* sections */
+  section{padding:64px 0}
+  h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.5px;margin:0 0 12px;text-align:center}
+  .lead{color:var(--muted);text-align:center;max-width:620px;margin:0 auto 44px}
+
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+  @media(max-width:880px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--card-bd);background:linear-gradient(180deg,#ffffff08,#ffffff03);border-radius:16px;padding:22px}
+  .card .ic{font-size:24px;margin-bottom:12px;display:block}
+  .card h3{margin:0 0 6px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+
+  /* privacy band */
+  .band{border:1px solid var(--card-bd);border-radius:20px;padding:38px;background:
+    radial-gradient(600px 200px at 0% 0%,#5ce1e618,transparent),
+    radial-gradient(600px 200px at 100% 100%,#7c8cff18,transparent),#0e0f1d}
+  .band-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+  @media(max-width:760px){.band-grid{grid-template-columns:1fr}}
+  .band h2{text-align:left;margin-bottom:14px}
+  .checks{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+  .checks li{display:flex;gap:12px;align-items:flex-start}
+  .checks .ck{color:var(--good);font-weight:900;flex:0 0 auto}
+  .badge-local{font-weight:800;font-size:clamp(40px,8vw,68px);line-height:1;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* steps */
+  .steps{counter-reset:s;display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{position:relative;border:1px solid var(--card-bd);border-radius:16px;padding:24px 22px 22px}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-14px;left:22px;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06121a;font-weight:900;display:grid;place-items:center}
+  .step h3{margin:10px 0 6px}
+  .step p{margin:0;color:var(--muted);font-size:15px}
+
+  /* pricing */
+  .price{max-width:440px;margin:0 auto;border:1px solid var(--accent);border-radius:20px;padding:36px;text-align:center;background:linear-gradient(180deg,#5ce1e60d,#0e0f1d)}
+  .price .amt{font-size:54px;font-weight:900;letter-spacing:-1px}
+  .price .amt small{font-size:18px;color:var(--muted);font-weight:600}
+  .price .once{color:var(--good);font-weight:700;margin:6px 0 18px}
+  .price ul{list-style:none;padding:0;margin:0 0 24px;text-align:left;display:grid;gap:10px}
+  .price ul li{display:flex;gap:10px}.price ul li::before{content:"✓";color:var(--good);font-weight:900}
+
+  /* faq */
+  details{border:1px solid var(--card-bd);border-radius:12px;padding:4px 18px;margin:10px 0;background:#ffffff05}
+  details summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";float:right;color:var(--accent);font-weight:900}
+  details[open] summary::after{content:"–"}
+  details p{margin:0 0 16px;color:var(--muted)}
+
+  .specs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-top:18px}
+  .specs span{border:1px solid var(--card-bd);border-radius:999px;padding:6px 14px}
+
+  footer{border-top:1px solid #ffffff0d;padding:34px 0;color:var(--muted);font-size:14px;text-align:center}
+  .note{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="brand"><img class="glyph" src="assets/solune-logo.svg" alt="" width="30" height="30"> Solune</div>
+  <div class="links">
+    <a href="#features">Fonctions</a>
+    <a href="#privacy">Confidentialité</a>
+    <a href="#how">Comment</a>
+    <a href="#pricing">Prix</a>
+    <a class="btn btn-primary" style="padding:10px 18px;font-size:14px" href="#waitlist">Liste d'attente</a>
+  </div>
+</div></nav>
+
+<header><div class="wrap">
+  <span class="pill"><span class="dot"></span> 100% local · zéro cloud · zéro abonnement</span>
+  <h1>Ton assistant IA personnel.<br><span class="grad">Entièrement sur ton Mac.</span></h1>
+  <p class="sub">Solune te parle, voit, code et pilote ton Mac — <b>sans jamais envoyer tes données dans le cloud</b>. Dis simplement « Hey Solune ».</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#waitlist">Rejoindre la liste d'attente</a>
+    <a class="btn btn-ghost" href="#how">Voir comment ça marche</a>
+  </div>
+  <div class="reassure">Paiement unique · Mac Apple Silicon · Téléchargement direct</div>
+</div></header>
+
+<section id="features"><div class="wrap">
+  <h2>Une vraie assistante, pas un gadget</h2>
+  <p class="lead">Tout ce qu'on attend d'un assistant moderne — la confidentialité en plus, parce que tout tourne chez toi.</p>
+  <div class="grid">
+    <div class="card"><span class="ic">🎙️</span><h3>Voix temps réel</h3><p>« Hey Solune » et tu parles naturellement. Elle écoute, répond à voix haute, et sait quand la conversation est finie.</p></div>
+    <div class="card"><span class="ic">👁️</span><h3>Vision en direct</h3><p>Active la caméra : Solune décrit ce qu'elle voit, lit du texte, identifie objets et scènes.</p></div>
+    <div class="card"><span class="ic">💻</span><h3>Elle code pour toi</h3><p>Scripts, jeux, pages web, correction de bugs. Demande, elle écrit le code complet.</p></div>
+    <div class="card"><span class="ic">🧠</span><h3>Mémoire qui te connaît</h3><p>Elle retient ce que tu lui dis (et oublie ce que tu effaces). Le tout en local, chiffré.</p></div>
+    <div class="card"><span class="ic">🖥️</span><h3>Pilote ton Mac</h3><p>Volume, apps, presse-papier, calendrier, mails — sur ta seule autorisation.</p></div>
+    <div class="card"><span class="ic">🌐</span><h3>Recherche le web</h3><p>Elle va vraiment lire les pages et te résume l'actualité — pas juste des liens.</p></div>
+    <div class="card"><span class="ic">⚙️</span><h3>S'adapte à ta machine</h3><p>Plus ton Mac est puissant, plus Solune installe des modèles costauds. Automatiquement.</p></div>
+    <div class="card"><span class="ic">🔁</span><h3>Proactive</h3><p>Elle prend des nouvelles, propose de l'aide au bon moment — et ouvre le micro pour que tu répondes.</p></div>
+    <div class="card"><span class="ic">🔒</span><h3>Chiffrée au repos</h3><p>Tes données sont chiffrées (AES-256) avec le Trousseau de ton Mac.</p></div>
+  </div>
+</div></section>
+
+<section id="privacy"><div class="wrap">
+  <div class="band"><div class="band-grid">
+    <div>
+      <span class="pill"><span class="dot"></span> Ta vie privée n'est pas le produit</span>
+      <h2>Zéro cloud. Vraiment.</h2>
+      <ul class="checks">
+        <li><span class="ck">✓</span> Les modèles d'IA tournent sur <b>ton</b> Mac, hors-ligne.</li>
+        <li><span class="ck">✓</span> Ta voix, ta caméra, tes fichiers <b>ne quittent jamais</b> l'appareil.</li>
+        <li><span class="ck">✓</span> Aucun compte, aucun mouchard, aucune télémétrie.</li>
+        <li><span class="ck">✓</span> Données chiffrées au repos (AES-256 + Trousseau).</li>
+        <li><span class="ck">✓</span> Fonctionne même sans Internet.</li>
+      </ul>
+    </div>
+    <div style="text-align:center">
+      <div class="badge-local">100%<br>LOCAL</div>
+      <p style="color:var(--muted);margin-top:14px">Contrairement aux assistants cloud, Solune n'envoie rien à un serveur. Ce qui se dit chez toi reste chez toi.</p>
+    </div>
+  </div></div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>Prête en 3 étapes</h2>
+  <p class="lead">Pas de configuration compliquée. Télécharge, installe, parle.</p>
+  <div class="steps">
+    <div class="step"><h3>Télécharge</h3><p>Récupère Solune après ton achat. L'app et son moteur IA sont inclus.</p></div>
+    <div class="step"><h3>Installe</h3><p>Au premier lancement, Solune détecte ton Mac et installe les modèles adaptés.</p></div>
+    <div class="step"><h3>Dis « Hey Solune »</h3><p>C'est tout. Parle-lui comme à une personne — elle t'écoute.</p></div>
+  </div>
+  <div class="specs">
+    <span>Mac Apple Silicon (M1–M4)</span><span>16 Go de RAM min.</span><span>macOS 13+</span><span>~10 Go disque</span>
+  </div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <h2>Un prix. Pour toujours.</h2>
+  <p class="lead">Pas d'abonnement, pas de coût caché. Tu paies une fois, Solune est à toi.</p>
+  <div class="price">
+    <div class="amt">—€ <small>/ à vie</small></div>
+    <div class="once">Paiement unique · mises à jour incluses</div>
+    <ul>
+      <li>Toutes les fonctions (voix, vision, code, mémoire, web)</li>
+      <li>100% local & privé, hors-ligne</li>
+      <li>Modèles adaptés à ton Mac, mis à jour automatiquement</li>
+      <li>Aucun abonnement, aucun compte</li>
+    </ul>
+    <!-- PRÉ-LANCEMENT : on capture des emails (waitlist). Quand le produit est en
+         vente, remplace ce href par ton lien Gumroad/Lemon Squeezy + "Obtenir Solune". -->
+    <a class="btn btn-primary" style="width:100%" href="#waitlist">Rejoindre la liste d'attente</a>
+    <p class="note" style="margin-top:14px;color:var(--muted);font-size:13px">Garantie satisfait ou remboursé 14 jours.</p>
+  </div>
+</div></section>
+
+<section id="waitlist"><div class="wrap">
+  <div class="band" style="max-width:580px;margin:0 auto;text-align:center">
+    <span class="pill"><span class="dot"></span> Lancement bientôt · accès anticipé</span>
+    <h2 style="margin-top:14px">Rejoins la liste d'attente</h2>
+    <p class="lead" style="margin-bottom:24px">Sois prévenu·e au lancement, avec le tarif <b>early-bird 39€</b> (au lieu de 59€) réservé aux premiers inscrits.</p>
+    <!-- Netlify Forms : gratuit, aucun backend. Marche quand la page est hébergée sur Netlify
+         (les emails arrivent dans Netlify → Forms). Sinon, branche Formspree/Tally. -->
+    <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+          style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <input type="hidden" name="form-name" value="waitlist">
+      <p style="display:none"><label>Ne pas remplir : <input name="bot-field"></label></p>
+      <input type="email" name="email" required placeholder="ton@email.com" aria-label="email"
+             style="flex:1;min-width:240px;padding:14px 16px;border-radius:12px;border:1px solid var(--card-bd);background:#0a0a14;color:var(--fg);font-size:16px">
+      <button class="btn btn-primary" type="submit">Me prévenir</button>
+    </form>
+    <p class="note" style="margin-top:12px;color:var(--muted);font-size:13px">Aucun spam — juste l'annonce du lancement.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Questions fréquentes</h2>
+  <div style="max-width:760px;margin:30px auto 0">
+    <details open><summary>Est-ce que mes données partent dans le cloud ?</summary><p>Non. Tout — voix, vision, mémoire, modèles — tourne localement sur ton Mac. Rien n'est envoyé à un serveur. Tu peux même couper Internet, Solune continue de fonctionner.</p></details>
+    <details><summary>De quel Mac ai-je besoin ?</summary><p>Un Mac Apple Silicon (M1, M2, M3, M4) avec 16 Go de RAM minimum et macOS 13+. Plus ton Mac est puissant, plus Solune utilise des modèles performants — automatiquement.</p></details>
+    <details><summary>Y a-t-il un abonnement ?</summary><p>Non. Paiement unique. Tu télécharges l'app et elle t'appartient, mises à jour incluses.</p></details>
+    <details><summary>Solune peut-elle vraiment coder ?</summary><p>Oui. Demande-lui un script, un petit jeu, une page web ou la correction d'un bug : elle écrit le code complet. La puissance dépend de ton Mac (modèles plus gros sur les machines plus puissantes).</p></details>
+    <details><summary>Comment l'activer à la voix ?</summary><p>Dis « Hey Solune ». Elle répond « Oui ? » et ouvre le micro pour la conversation. Tu peux aussi renommer ton assistante — le mot de réveil suit.</p></details>
+    <details><summary>Et la sécurité de mes données ?</summary><p>Tes données sont chiffrées au repos (AES-256) via le Trousseau de ton Mac. Aucune télémétrie, aucun compte requis.</p></details>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap" style="text-align:center">
+  <div class="band" style="padding:48px 30px">
+    <h2>Reprends le contrôle de ton IA.</h2>
+    <p class="lead">Une assistante puissante qui respecte ta vie privée. Sur ton Mac, rien que pour toi.</p>
+    <a class="btn btn-primary" href="#waitlist">Rejoindre la liste d'attente</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="brand" style="justify-content:center;margin-bottom:10px"><img class="glyph" src="assets/solune-logo.svg" alt="" width="30" height="30"> Solune</div>
+  Assistant IA 100% local pour Mac · © <span id="y"></span> Solune · Tes données restent chez toi.
+</div></footer>
+
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+// Waitlist : on intercepte l'envoi pour afficher un remerciement sans quitter la page.
+// Le POST vers "/" est capté par Netlify Forms (en prod). En local, on remercie quand même.
+(function(){
+  var f=document.querySelector('form[name=waitlist]'); if(!f) return;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn=f.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='…';}
+    var body=new URLSearchParams(new FormData(f)).toString();
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+      .then(done).catch(done);
+    function done(){
+      f.outerHTML='<div style="text-align:center;padding:6px 0">'
+        +'<div style="font-size:38px">🎉</div>'
+        +'<p style="font-size:19px;font-weight:700;margin:10px 0 4px">Merci, tu es sur la liste !</p>'
+        +'<p style="color:var(--muted);margin:0">On te prévient au lancement, avec ton tarif early-bird <b>39&nbsp;€</b>.</p></div>';
+    }
+  });
+})();
+</script>
+</body>
+</html>
