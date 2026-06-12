@@ -204,13 +204,11 @@
     <span class="pill"><span class="dot"></span> Lancement bientôt · accès anticipé</span>
     <h2 style="margin-top:14px">Rejoins la liste d'attente</h2>
     <p class="lead" style="margin-bottom:24px">Sois prévenu·e au lancement, avec le tarif <b>early-bird 39€</b> (au lieu de 59€) réservé aux premiers inscrits.</p>
-    <!-- Netlify Forms : gratuit, aucun backend. Marche quand la page est hébergée sur Netlify
-         (les emails arrivent dans Netlify → Forms). Sinon, branche Formspree/Tally. -->
-    <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+    <!-- Capture des emails via Google Forms (gratuit, aucun backend, les réponses
+         arrivent dans le Google Drive du propriétaire). POST direct, sans redirection. -->
+    <form id="waitlist-form"
           style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-      <input type="hidden" name="form-name" value="waitlist">
-      <p style="display:none"><label>Ne pas remplir : <input name="bot-field"></label></p>
-      <input type="email" name="email" required placeholder="ton@email.com" aria-label="email"
+      <input type="email" name="entry.1137131454" required placeholder="ton@email.com" aria-label="email"
              style="flex:1;min-width:240px;padding:14px 16px;border-radius:12px;border:1px solid var(--card-bd);background:#0a0a14;color:var(--fg);font-size:16px">
       <button class="btn btn-primary" type="submit">Me prévenir</button>
     </form>
@@ -245,15 +243,15 @@
 
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
-// Waitlist : on intercepte l'envoi pour afficher un remerciement sans quitter la page.
-// Le POST vers "/" est capté par Netlify Forms (en prod). En local, on remercie quand même.
+// Waitlist : POST vers Google Forms (no-cors), puis remerciement sans quitter la page.
 (function(){
-  var f=document.querySelector('form[name=waitlist]'); if(!f) return;
+  var FORM='https://docs.google.com/forms/d/1dLttBBQuI4_W1T-fR7c_AZJyna8n_4VWBymCSq0r-wY/formResponse';
+  var f=document.getElementById('waitlist-form'); if(!f) return;
   f.addEventListener('submit', function(e){
     e.preventDefault();
     var btn=f.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='…';}
     var body=new URLSearchParams(new FormData(f)).toString();
-    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+    fetch(FORM,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
       .then(done).catch(done);
     function done(){
       f.outerHTML='<div style="text-align:center;padding:6px 0">'
